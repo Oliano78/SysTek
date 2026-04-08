@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarifs — SysTek Solutions Tamatave</title>
+<style>/* ─── RESET & BASE ─── */
+:root {
+  --bg: #04080f;
+  --s1: #080f1e;
+  --s2: #0c1628;
+  --border: rgba(255,255,255,0.07);
+  --cyan: #00d4ff;
+  --green: #00f087;
+  --amber: #ffc940;
+  --purple: #a78bfa;
+  --red: #ff4d6d;
+  --white: #e2eeff;
+  --dim: #4a6580;
+  --f: 'Outfit', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 14px;
+  --max: 1140px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--f);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body::before {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,212,255,0.006) 2px, rgba(0,212,255,0.006) 4px);
+}
+
+img { max-width:100%; display:block; }
+a { text-decoration:none; color:inherit; }
+
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative; z-index:1;
+}
+
+/* ─── TYPOGRAPHY ─── */
+h1 { font-size: clamp(36px, 5vw, 64px); font-weight:900; line-height:1.08; }
+h2 { font-size: clamp(28px, 3.5vw, 44px); font-weight:800; line-height:1.15; }
+h3 { font-size:20px; font-weight:700; }
+h4 { font-size:17px; font-weight:700; }
+h5 { font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--dim); margin-bottom:14px; }
+p { color:#8aadcc; line-height:1.7; }
+
+.grad { background: linear-gradient(90deg, var(--cyan), var(--green)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.grad-green { background: linear-gradient(90deg, var(--green), var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+
+/* ─── BUTTONS ─── */
+.btn-primary {
+  display:inline-block;
+  background: linear-gradient(135deg, var(--cyan), var(--green));
+  color: #04080f; font-weight:800; font-size:14px;
+  padding:13px 28px; border-radius:10px;
+  transition: opacity .2s, transform .2s;
+  border:none; cursor:pointer;
+}
+.btn-primary:hover { opacity:.9; transform:translateY(-1px); }
+.btn-primary.btn-large { padding:16px 36px; font-size:16px; }
+
+.btn-ghost {
+  display:inline-block;
+  border:1px solid rgba(0,212,255,.3);
+  color:var(--cyan); font-weight:700; font-size:14px;
+  padding:12px 26px; border-radius:10px;
+  transition: border-color .2s, background .2s;
+}
+.btn-ghost:hover { border-color:var(--cyan); background:rgba(0,212,255,.06); }
+
+/* ─── NAV ─── */
+.nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background: rgba(4,8,15,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom:1px solid var(--border);
+  transition: box-shadow .3s;
+}
+.nav.scrolled { box-shadow: 0 4px 40px rgba(0,0,0,0.4); }
+
+.nav-inner {
+  max-width:var(--max); margin:0 auto; padding:0 24px;
+  height:68px; display:flex; align-items:center; gap:32px;
+}
+
+.nav-logo {
+  display:flex; align-items:center; gap:12px;
+  text-decoration:none;
+}
+
+.logo-box {
+  width:42px; height:42px; border-radius:10px;
+  background:linear-gradient(135deg,var(--cyan),var(--green));
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--mono); font-size:20px; font-weight:600;
+  color:#04080f; flex-shrink:0;
+  box-shadow:0 0 20px rgba(0,212,255,.25);
+}
+
+.logo-name { display:block; font-size:16px; font-weight:800; color:var(--white); line-height:1.2; }
+.logo-sub { display:block; font-size:9px; letter-spacing:3px; color:var(--green); text-transform:uppercase; }
+
+.nav-links { display:flex; gap:4px; margin-left:auto; }
+.nav-links a {
+  padding:8px 14px; border-radius:8px;
+  font-size:14px; font-weight:500; color:var(--dim);
+  transition:color .2s, background .2s;
+}
+.nav-links a:hover, .nav-links a.active { color:var(--white); background:rgba(255,255,255,.05); }
+
+.btn-nav {
+  background:linear-gradient(135deg,var(--cyan),var(--green));
+  color:#04080f; font-weight:700; font-size:13px;
+  padding:9px 20px; border-radius:8px;
+  white-space:nowrap;
+  transition:opacity .2s;
+}
+.btn-nav:hover { opacity:.85; }
+
+.burger { display:none; background:none; border:none; color:var(--white); font-size:22px; cursor:pointer; }
+
+.mobile-menu {
+  display:none; flex-direction:column; gap:4px;
+  padding:16px 24px; border-top:1px solid var(--border);
+}
+.mobile-menu a { padding:10px 14px; border-radius:8px; font-size:15px; color:var(--dim); }
+.mobile-menu a:hover { color:var(--white); background:rgba(255,255,255,.05); }
+.mobile-menu.open { display:flex; }
+
+/* ─── HERO ─── */
+.hero {
+  min-height:100vh; display:flex; align-items:center;
+  padding-top:68px; position:relative; overflow:hidden;
+}
+
+.hero-bg {
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse 80% 70% at 50% 0%, rgba(0,212,255,.08) 0%, transparent 65%),
+              radial-gradient(ellipse 50% 50% at 80% 50%, rgba(0,240,135,.05) 0%, transparent 60%),
+              var(--s1);
+}
+
+.hero-content { padding:80px 0; text-align:center; }
+
+.hero-badge {
+  display:inline-block;
+  background:rgba(0,240,135,.1); border:1px solid rgba(0,240,135,.25);
+  color:var(--green); font-size:12px; font-weight:700; letter-spacing:1.5px;
+  padding:6px 18px; border-radius:100px; text-transform:uppercase;
+  margin-bottom:24px;
+}
+
+.hero-content h1 { margin-bottom:20px; }
+
+.hero-content > p {
+  font-size:18px; max-width:580px; margin:0 auto 36px;
+  color:#7a9aB8;
+}
+
+.hero-cta { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:56px; }
+
+.hero-stats {
+  display:inline-flex; align-items:center; gap:0;
+  background:rgba(255,255,255,.04); border:1px solid var(--border);
+  border-radius:14px; overflow:hidden;
+}
+
+.hstat { padding:16px 28px; text-align:center; }
+.hstat-num { display:block; font-family:var(--mono); font-size:20px; font-weight:600; color:var(--cyan); }
+.hstat-label { display:block; font-size:11px; color:var(--dim); margin-top:2px; }
+.hstat-div { width:1px; background:var(--border); align-self:stretch; }
+
+/* ─── SECTIONS ─── */
+.section { padding:90px 0; }
+.section.alt { background:var(--s1); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+
+.section-head { text-align:center; margin-bottom:56px; }
+.section-tag {
+  display:inline-block;
+  background:rgba(0,212,255,.08); border:1px solid rgba(0,212,255,.2);
+  color:var(--cyan); font-size:11px; font-weight:700; letter-spacing:2px;
+  padding:5px 16px; border-radius:100px; text-transform:uppercase;
+  margin-bottom:16px;
+}
+.section-head h2 { margin-bottom:12px; }
+.section-head p { max-width:520px; margin:0 auto; }
+
+/* ─── SERVICE CARDS ─── */
+.services-grid {
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(320px,1fr)); gap:16px;
+}
+
+.svc-card {
+  background:var(--s2); border:1px solid var(--border);
+  border-radius:var(--radius); padding:28px;
+  transition:border-color .25s, transform .2s;
+}
+.svc-card:hover { border-color:rgba(255,255,255,.15); transform:translateY(-3px); }
+
+.svc-icon {
+  width:52px; height:52px; border-radius:12px; border:1px solid;
+  display:flex; align-items:center; justify-content:center;
+  font-size:24px; margin-bottom:18px;
+}
+
+.svc-card h3 { margin-bottom:10px; }
+.svc-card p { font-size:13.5px; margin-bottom:18px; }
+
+.svc-link {
+  font-size:13px; font-weight:700; color:var(--cyan);
+  transition:gap .2s;
+}
+.svc-link:hover { color:var(--green); }
+
+/* ─── WHY US ─── */
+.why-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; }
+
+.why-card {
+  background:var(--s2); border:1px solid var(--border);
+  border-radius:var(--radius); padding:28px;
+  position:relative; overflow:hidden;
+}
+
+.why-num {
+  font-family:var(--mono); font-size:48px; font-weight:700;
+  color:rgba(0,212,255,.08); position:absolute; top:12px; right:18px;
+  line-height:1;
+}
+
+.why-card h4 { margin-bottom:10px; font-size:18px; }
+.why-card p { font-size:13.5px; }
+
+/* ─── CTA SECTION ─── */
+.cta-section { background:var(--s1); border-top:1px solid var(--border); }
+
+.cta-box {
+  background: linear-gradient(135deg, rgba(0,212,255,.06), rgba(0,240,135,.06));
+  border:1px solid rgba(0,212,255,.2);
+  border-radius:20px; padding:56px 40px;
+  text-align:center;
+}
+
+.cta-badge {
+  display:inline-block;
+  background:rgba(0,240,135,.1); border:1px solid rgba(0,240,135,.2);
+  color:var(--green); font-size:12px; font-weight:700; letter-spacing:1.5px;
+  padding:5px 16px; border-radius:100px; text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.cta-box h2 { margin-bottom:12px; }
+.cta-box > p { max-width:480px; margin:0 auto 24px; }
+
+.cta-perks {
+  display:flex; gap:20px; justify-content:center; flex-wrap:wrap;
+  margin-bottom:32px;
+}
+.cta-perks span { font-size:13px; font-weight:600; color:var(--green); }
+
+/* ─── TARIFS PAGE ─── */
+.price-table {
+  background:var(--s1); border:1px solid var(--border);
+  border-radius:16px; overflow:hidden;
+}
+
+.pt-head {
+  display:grid; grid-template-columns:2.5fr 1.5fr 1fr 1fr;
+  padding:13px 24px;
+  background:rgba(255,255,255,.03);
+  border-bottom:1px solid var(--border);
+  font-size:10px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; color:var(--dim);
+}
+
+.pt-cat {
+  padding:10px 24px;
+  background:rgba(0,0,0,.2);
+  font-size:10px; font-weight:700; letter-spacing:1px;
+  text-transform:uppercase;
+  border-bottom:1px solid rgba(255,255,255,.03);
+  grid-column:1/-1;
+}
+
+.pt-row {
+  display:grid; grid-template-columns:2.5fr 1.5fr 1fr 1fr;
+  padding:14px 24px; border-bottom:1px solid rgba(255,255,255,.03);
+  align-items:center; transition:background .15s;
+}
+.pt-row:hover { background:rgba(255,255,255,.02); }
+.pt-row:last-child { border-bottom:none; }
+
+.pt-name { font-size:13px; font-weight:500; color:var(--white); }
+.pt-name small { display:block; font-size:11px; color:var(--dim); margin-top:2px; }
+.pt-price { font-family:var(--mono); font-size:12px; color:var(--green); }
+.pt-time { font-size:11px; color:var(--dim); }
+.pt-seg { display:flex; gap:4px; flex-wrap:wrap; }
+
+.tg { font-size:9px; font-weight:700; letter-spacing:.5px; padding:2px 7px; border-radius:4px; text-transform:uppercase; }
+.tg-c { background:rgba(0,212,255,.1); color:var(--cyan); }
+.tg-g { background:rgba(0,240,135,.1); color:var(--green); }
+.tg-a { background:rgba(255,201,64,.1); color:var(--amber); }
+
+/* ─── CONTACT PAGE ─── */
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
+
+.contact-form {
+  background:var(--s1); border:1px solid var(--border);
+  border-radius:var(--radius); padding:36px;
+}
+
+.form-group { margin-bottom:18px; }
+.form-group label { display:block; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--dim); margin-bottom:8px; }
+.form-group input, .form-group select, .form-group textarea {
+  width:100%; background:var(--s2); border:1px solid var(--border);
+  border-radius:10px; padding:12px 16px;
+  font-family:var(--f); font-size:14px; color:var(--white);
+  outline:none; transition:border-color .2s;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--cyan); }
+.form-group textarea { min-height:120px; resize:vertical; }
+.form-group select option { background:var(--s2); }
+
+.contact-info { display:flex; flex-direction:column; gap:16px; }
+
+.info-card {
+  background:var(--s2); border:1px solid var(--border);
+  border-radius:var(--radius); padding:22px;
+  display:flex; gap:16px; align-items:flex-start;
+}
+.info-icon { font-size:24px; flex-shrink:0; }
+.info-card h4 { margin-bottom:4px; }
+.info-card p { font-size:13px; }
+
+/* ─── SERVICES FULL PAGE ─── */
+.service-section { padding:80px 0; border-bottom:1px solid var(--border); }
+.service-section:last-child { border-bottom:none; }
+
+.service-header {
+  display:flex; gap:20px; align-items:center; margin-bottom:36px;
+}
+.service-big-icon {
+  width:64px; height:64px; border-radius:14px; border:1px solid;
+  display:flex; align-items:center; justify-content:center;
+  font-size:30px; flex-shrink:0;
+}
+.service-header h2 { margin-bottom:6px; }
+.service-header p { font-size:14px; }
+
+.cards-3 { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
+
+.detail-card {
+  background:var(--s2); border:1px solid var(--border);
+  border-radius:var(--radius); padding:24px;
+  transition:border-color .2s;
+}
+.detail-card:hover { border-color:rgba(255,255,255,.15); }
+.detail-card h4 { margin-bottom:8px; }
+.detail-card p { font-size:13px; margin-bottom:14px; }
+.detail-card .price-badge {
+  font-family:var(--mono); font-size:12px; font-weight:600;
+  padding:5px 12px; border-radius:6px;
+  background:rgba(0,240,135,.1); color:var(--green);
+  display:inline-block;
+}
+
+/* ─── FOOTER ─── */
+.footer { background:var(--s1); border-top:1px solid var(--border); padding:60px 0 0; }
+
+.footer-inner {
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px;
+  padding-bottom:48px;
+}
+
+.footer-brand p { font-size:13px; margin-top:14px; max-width:280px; }
+
+.footer-links { display:flex; flex-direction:column; }
+.footer-links a { font-size:13px; color:var(--dim); padding:5px 0; transition:color .2s; }
+.footer-links a:hover { color:var(--white); }
+
+.footer-contact p { font-size:13px; color:var(--dim); padding:4px 0; }
+
+.footer-bottom {
+  border-top:1px solid var(--border); padding:20px 24px;
+  text-align:center;
+}
+.footer-bottom p { font-size:12px; color:var(--dim); }
+
+/* ─── PAGE HEADER ─── */
+.page-hero {
+  padding: 120px 0 60px;
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(0,212,255,.07) 0%, transparent 70%), var(--s1);
+  border-bottom:1px solid var(--border);
+  text-align:center;
+}
+.page-hero h1 { font-size:clamp(32px,4vw,52px); margin-bottom:12px; }
+.page-hero p { max-width:520px; margin:0 auto; }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  .footer-inner { grid-template-columns:1fr 1fr; }
+  .contact-grid { grid-template-columns:1fr; }
+  .pt-head, .pt-row { grid-template-columns:2fr 1fr; }
+  .pt-head > *:nth-child(n+3), .pt-row > *:nth-child(n+3) { display:none; }
+}
+
+@media(max-width:640px){
+  .nav-links, .btn-nav { display:none; }
+  .burger { display:block; margin-left:auto; }
+  .hero-content { padding:60px 0; }
+  .hero-stats { flex-direction:column; }
+  .hstat-div { width:auto; height:1px; align-self:stretch; }
+  .footer-inner { grid-template-columns:1fr; gap:32px; }
+  .cta-box { padding:36px 20px; }
+  .section { padding:60px 0; }
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="logo-box">S</div><div><span class="logo-name">SysTek Solutions</span><span class="logo-sub">Tamatave · Madagascar</span></div></a>
+    <div class="nav-links"><a href="index.html">Accueil</a><a href="services.html">Services</a><a href="tarifs.html" class="active">Tarifs</a><a href="contact.html">Contact</a></div>
+    <a href="contact.html" class="btn-nav">Devis Gratuit</a>
+    <button class="burger" id="burger">&#9776;</button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu"><a href="index.html">Accueil</a><a href="services.html">Services</a><a href="tarifs.html">Tarifs</a><a href="contact.html">Contact</a></div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="hero-badge" style="display:inline-block;background:rgba(0,240,135,.1);border:1px solid rgba(0,240,135,.25);color:#00f087;font-size:12px;font-weight:700;letter-spacing:1.5px;padding:6px 18px;border-radius:100px;text-transform:uppercase;margin-bottom:20px">Tarifs transparents</div>
+    <h1>Nos <span class="grad">tarifs</span></h1>
+    <p>Tarifs adaptés au marché de Tamatave. Diagnostic et devis toujours gratuits pour les nouveaux clients.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="price-table">
+      <div class="pt-head"><span>Service</span><span>Tarif (Ariary)</span><span>Délai</span><span>Segment</span></div>
+
+      <div class="pt-cat" style="color:var(--cyan)">🔧 Maintenance & Dépannage</div>
+      <div class="pt-row"><div class="pt-name">Diagnostic PC/Laptop<small>Gratuit nouveaux clients</small></div><div class="pt-price" style="color:var(--green)">GRATUIT*</div><div class="pt-time">30 min</div><div class="pt-seg"><span class="tg tg-c">Part.</span><span class="tg tg-g">PME</span></div></div>
+      <div class="pt-row"><div class="pt-name">Dépannage logiciel<small>Virus, OS, optimisation</small></div><div class="pt-price">30 000 – 50 000</div><div class="pt-time">1–2h</div><div class="pt-seg"><span class="tg tg-c">Part.</span><span class="tg tg-g">PME</span></div></div>
+      <div class="pt-row"><div class="pt-name">Dépannage matériel<small>Remplacement composants</small></div><div class="pt-price">50 000 – 120 000</div><div class="pt-time">1–3 jours</div><div class="pt-seg"><span class="tg tg-c">Part.</span><span class="tg tg-g">PME</span></div></div>
+      <div class="pt-row"><div class="pt-name">Maintenance imprimantes</div><div class="pt-price">40 000 – 80 000</div><div class="pt-time">1–2h</div><div class="pt-seg"><span class="tg tg-g">PME</span><span class="tg tg-a">Hôtel</span></div></div>
+      <div class="pt-row"><div class="pt-name">Récupération de données</div><div class="pt-price">50 000 – 150 000</div><div class="pt-time">1–5 jours</div><div class="pt-seg"><span class="tg tg-c">Part.</span><span class="tg tg-g">PME</span></div></div>
+
+      <div class="pt-cat" style="color:var(--green)">💾 Backup & Restauration</div>
+      <div class="pt-row"><div class="pt-name">Sauvegarde locale auto</div><div class="pt-price">60 000 – 100 000</div><div class="pt-time">2–4h</div><div class="pt-seg"><span class="tg tg-c">Part.</span><span class="tg tg-g">PME</span></div></div>
+      <div class="pt-row"><div class="pt-name">Backup Cloud auto</div><div class="pt-price">50 000 + abonnement</div><div class="pt-time">1–2h</div><div class="pt-seg"><span class="tg tg-c">Part.</span><span class="tg tg-g">PME</span><span class="tg tg-a">Hôtel</span></div></div>
+      <div class="pt-row"><div class="pt-name">Restauration d'urgence<small>Intervention &lt;4h</small></div><div class="pt-price">100 000 – 250 000</div><div class="pt-time">Express</div><div class="pt-seg"><span class="tg tg-c">Part.</span><span class="tg tg-g">PME</span><span class="tg tg-a">Hôtel</span></div></div>
+      <div class="pt-row"><div class="pt-name">Plan de reprise d'activité</div><div class="pt-price">200 000 – 400 000</div><div class="pt-time">1–2 jours</div><div class="pt-seg"><span class="tg tg-g">PME</span><span class="tg tg-a">Hôtel</span></div></div>
+
+      <div class="pt-cat" style="color:var(--red)">🔒 Sécurité Informatique</div>
+      <div class="pt-row"><div class="pt-name">Antivirus Pro (ESET/Bitdefender)</div><div class="pt-price">40 000 – 120 000</div><div class="pt-time">1–2h</div><div class="pt-seg"><span class="tg tg-c">Part.</span><span class="tg tg-g">PME</span></div></div>
+      <div class="pt-row"><div class="pt-name">Firewall & Routeur sécurisé</div><div class="pt-price">80 000 – 200 000</div><div class="pt-time">2–4h</div><div class="pt-seg"><span class="tg tg-g">PME</span><span class="tg tg-a">Hôtel</span></div></div>
+      <div class="pt-row"><div class="pt-name">Audit de sécurité complet</div><div class="pt-price">150 000 – 300 000</div><div class="pt-time">½ journée</div><div class="pt-seg"><span class="tg tg-g">PME</span><span class="tg tg-a">Hôtel</span></div></div>
+      <div class="pt-row"><div class="pt-name">Nettoyage post-virus/ransomware</div><div class="pt-price">80 000 – 200 000</div><div class="pt-time">1 jour</div><div class="pt-seg"><span class="tg tg-c">Part.</span><span class="tg tg-g">PME</span></div></div>
+
+      <div class="pt-cat" style="color:var(--cyan)">📡 Réseaux & Wi-Fi</div>
+      <div class="pt-row"><div class="pt-name">Wi-Fi particulier</div><div class="pt-price">60 000 – 100 000</div><div class="pt-time">2–4h</div><div class="pt-seg"><span class="tg tg-c">Part.</span></div></div>
+      <div class="pt-row"><div class="pt-name">Wi-Fi hôtel/restaurant<small>Portail captif inclus</small></div><div class="pt-price">300 000 – 800 000</div><div class="pt-time">1–2 jours</div><div class="pt-seg"><span class="tg tg-a">Hôtel</span><span class="tg tg-g">PME</span></div></div>
+      <div class="pt-row"><div class="pt-name">Câblage réseau entreprise</div><div class="pt-price">Sur devis</div><div class="pt-time">Variable</div><div class="pt-seg"><span class="tg tg-g">PME</span><span class="tg tg-a">Hôtel</span></div></div>
+
+      <div class="pt-cat" style="color:var(--amber)">📹 Surveillance CCTV</div>
+      <div class="pt-row"><div class="pt-name">Pack Maison 2–4 caméras</div><div class="pt-price">200 000 – 350 000</div><div class="pt-time">½ journée</div><div class="pt-seg"><span class="tg tg-c">Part.</span></div></div>
+      <div class="pt-row"><div class="pt-name">Pack Commerce 4–8 caméras</div><div class="pt-price">350 000 – 600 000</div><div class="pt-time">1 jour</div><div class="pt-seg"><span class="tg tg-g">PME</span></div></div>
+      <div class="pt-row"><div class="pt-name">Pack Pro 8–16 caméras</div><div class="pt-price">600 000 – 1 500 000</div><div class="pt-time">1–2 jours</div><div class="pt-seg"><span class="tg tg-g">PME</span><span class="tg tg-a">Hôtel</span></div></div>
+      <div class="pt-row"><div class="pt-name">Maintenance CCTV mensuelle</div><div class="pt-price">50 000 – 100 000/mois</div><div class="pt-time">Mensuel</div><div class="pt-seg"><span class="tg tg-g">PME</span><span class="tg tg-a">Hôtel</span></div></div>
+
+      <div class="pt-cat" style="color:var(--purple)">🎓 Formation Informatique</div>
+      <div class="pt-row"><div class="pt-name">Word & Excel</div><div class="pt-price">30 000/heure</div><div class="pt-time">À la carte</div><div class="pt-seg"><span class="tg tg-c">Part.</span><span class="tg tg-g">PME</span></div></div>
+      <div class="pt-row"><div class="pt-name">Cybersécurité (atelier groupe)</div><div class="pt-price">100 000 – 200 000</div><div class="pt-time">2–3h</div><div class="pt-seg"><span class="tg tg-g">PME</span><span class="tg tg-a">Hôtel</span></div></div>
+      <div class="pt-row"><div class="pt-name">Initiation à l'IA</div><div class="pt-price">50 000 – 150 000</div><div class="pt-time">2–4h</div><div class="pt-seg"><span class="tg tg-c">Part.</span><span class="tg tg-g">PME</span><span class="tg tg-a">Hôtel</span></div></div>
+      <div class="pt-row"><div class="pt-name">Formation sur mesure entreprise</div><div class="pt-price">Sur devis</div><div class="pt-time">½j – 1j</div><div class="pt-seg"><span class="tg tg-g">PME</span><span class="tg tg-a">Hôtel</span></div></div>
+
+      <div class="pt-cat" style="color:var(--dim)">📋 Contrats récurrents</div>
+      <div class="pt-row"><div class="pt-name">Contrat maintenance PME<small>Intervention prioritaire</small></div><div class="pt-price">150 000 – 400 000/mois</div><div class="pt-time">Mensuel</div><div class="pt-seg"><span class="tg tg-g">PME</span></div></div>
+      <div class="pt-row"><div class="pt-name">Contrat maintenance hôtel<small>Wi-Fi + caméras + postes</small></div><div class="pt-price">300 000 – 700 000/mois</div><div class="pt-time">Mensuel</div><div class="pt-seg"><span class="tg tg-a">Hôtel</span></div></div>
+    </div>
+
+    <p style="margin-top:18px;font-size:12px;color:var(--dim)">* Diagnostic gratuit pour tout nouveau client — hors coût des pièces de remplacement. Tarifs indicatifs, devis personnalisé sur demande.</p>
+  </div>
+</section>
+
+<section class="section cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <div class="cta-badge">💬 Demandez votre devis</div>
+      <h2>Pas sûr du tarif pour <span class="grad-green">votre situation ?</span></h2>
+      <p>Contactez-nous — nous vous répondons sous 2h avec un devis personnalisé et gratuit.</p>
+      <a href="contact.html" class="btn-primary btn-large" style="margin-top:24px">Obtenir un devis gratuit</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand"><div class="nav-logo"><div class="logo-box">S</div><div><span class="logo-name">SysTek Solutions</span><span class="logo-sub">Reliable IT Systems · Local Support</span></div></div><p>Votre partenaire informatique de confiance à Tamatave, Madagascar.</p></div>
+    <div class="footer-links"><h5>Navigation</h5><a href="index.html">Accueil</a><a href="services.html">Services</a><a href="tarifs.html">Tarifs</a><a href="contact.html">Contact</a></div>
+    <div class="footer-links"><h5>Services</h5><a href="services.html#maintenance">Dépannage PC</a><a href="services.html#backup">Backup</a><a href="services.html#securite">Sécurité IT</a><a href="services.html#cctv">Caméras CCTV</a></div>
+    <div class="footer-contact"><h5>Contact</h5><p>📍 Tamatave, Madagascar</p><p>📞 +261 34 00 000 00</p><p>✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3d5e5253495c5e497d4e444e49585613505a">[email&#160;protected]</a></p></div>
+  </div>
+  <div class="footer-bottom"><p>© 

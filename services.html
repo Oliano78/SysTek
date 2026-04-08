@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tous les services IT de SysTek Solutions à Tamatave — Dépannage, Backup, Sécurité, CCTV, Formation.">
+<title>Services — SysTek Solutions Tamatave</title>
+<style>/* ─── RESET & BASE ─── */
+:root {
+  --bg: #04080f;
+  --s1: #080f1e;
+  --s2: #0c1628;
+  --border: rgba(255,255,255,0.07);
+  --cyan: #00d4ff;
+  --green: #00f087;
+  --amber: #ffc940;
+  --purple: #a78bfa;
+  --red: #ff4d6d;
+  --white: #e2eeff;
+  --dim: #4a6580;
+  --f: 'Outfit', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 14px;
+  --max: 1140px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--f);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body::before {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,212,255,0.006) 2px, rgba(0,212,255,0.006) 4px);
+}
+
+img { max-width:100%; display:block; }
+a { text-decoration:none; color:inherit; }
+
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative; z-index:1;
+}
+
+/* ─── TYPOGRAPHY ─── */
+h1 { font-size: clamp(36px, 5vw, 64px); font-weight:900; line-height:1.08; }
+h2 { font-size: clamp(28px, 3.5vw, 44px); font-weight:800; line-height:1.15; }
+h3 { font-size:20px; font-weight:700; }
+h4 { font-size:17px; font-weight:700; }
+h5 { font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--dim); margin-bottom:14px; }
+p { color:#8aadcc; line-height:1.7; }
+
+.grad { background: linear-gradient(90deg, var(--cyan), var(--green)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.grad-green { background: linear-gradient(90deg, var(--green), var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+
+/* ─── BUTTONS ─── */
+.btn-primary {
+  display:inline-block;
+  background: linear-gradient(135deg, var(--cyan), var(--green));
+  color: #04080f; font-weight:800; font-size:14px;
+  padding:13px 28px; border-radius:10px;
+  transition: opacity .2s, transform .2s;
+  border:none; cursor:pointer;
+}
+.btn-primary:hover { opacity:.9; transform:translateY(-1px); }
+.btn-primary.btn-large { padding:16px 36px; font-size:16px; }
+
+.btn-ghost {
+  display:inline-block;
+  border:1px solid rgba(0,212,255,.3);
+  color:var(--cyan); font-weight:700; font-size:14px;
+  padding:12px 26px; border-radius:10px;
+  transition: border-color .2s, background .2s;
+}
+.btn-ghost:hover { border-color:var(--cyan); background:rgba(0,212,255,.06); }
+
+/* ─── NAV ─── */
+.nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background: rgba(4,8,15,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom:1px solid var(--border);
+  transition: box-shadow .3s;
+}
+.nav.scrolled { box-shadow: 0 4px 40px rgba(0,0,0,0.4); }
+
+.nav-inner {
+  max-width:var(--max); margin:0 auto; padding:0 24px;
+  height:68px; display:flex; align-items:center; gap:32px;
+}
+
+.nav-logo {
+  display:flex; align-items:center; gap:12px;
+  text-decoration:none;
+}
+
+.logo-box {
+  width:42px; height:42px; border-radius:10px;
+  background:linear-gradient(135deg,var(--cyan),var(--green));
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--mono); font-size:20px; font-weight:600;
+  color:#04080f; flex-shrink:0;
+  box-shadow:0 0 20px rgba(0,212,255,.25);
+}
+
+.logo-name { display:block; font-size:16px; font-weight:800; color:var(--white); line-height:1.2; }
+.logo-sub { display:block; font-size:9px; letter-spacing:3px; color:var(--green); text-transform:uppercase; }
+
+.nav-links { display:flex; gap:4px; margin-left:auto; }
+.nav-links a {
+  padding:8px 14px; border-radius:8px;
+  font-size:14px; font-weight:500; color:var(--dim);
+  transition:color .2s, background .2s;
+}
+.nav-links a:hover, .nav-links a.active { color:var(--white); background:rgba(255,255,255,.05); }
+
+.btn-nav {
+  background:linear-gradient(135deg,var(--cyan),var(--green));
+  color:#04080f; font-weight:700; font-size:13px;
+  padding:9px 20px; border-radius:8px;
+  white-space:nowrap;
+  transition:opacity .2s;
+}
+.btn-nav:hover { opacity:.85; }
+
+.burger { display:none; background:none; border:none; color:var(--white); font-size:22px; cursor:pointer; }
+
+.mobile-menu {
+  display:none; flex-direction:column; gap:4px;
+  padding:16px 24px; border-top:1px solid var(--border);
+}
+.mobile-menu a { padding:10px 14px; border-radius:8px; font-size:15px; color:var(--dim); }
+.mobile-menu a:hover { color:var(--white); background:rgba(255,255,255,.05); }
+.mobile-menu.open { display:flex; }
+
+/* ─── HERO ─── */
+.hero {
+  min-height:100vh; display:flex; align-items:center;
+  padding-top:68px; position:relative; overflow:hidden;
+}
+
+.hero-bg {
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse 80% 70% at 50% 0%, rgba(0,212,255,.08) 0%, transparent 65%),
+              radial-gradient(ellipse 50% 50% at 80% 50%, rgba(0,240,135,.05) 0%, transparent 60%),
+              var(--s1);
+}
+
+.hero-content { padding:80px 0; text-align:center; }
+
+.hero-badge {
+  display:inline-block;
+  background:rgba(0,240,135,.1); border:1px solid rgba(0,240,135,.25);
+  color:var(--green); font-size:12px; font-weight:700; letter-spacing:1.5px;
+  padding:6px 18px; border-radius:100px; text-transform:uppercase;
+  margin-bottom:24px;
+}
+
+.hero-content h1 { margin-bottom:20px; }
+
+.hero-content > p {
+  font-size:18px; max-width:580px; margin:0 auto 36px;
+  color:#7a9aB8;
+}
+
+.hero-cta { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:56px; }
+
+.hero-stats {
+  display:inline-flex; align-items:center; gap:0;
+  background:rgba(255,255,255,.04); border:1px solid var(--border);
+  border-radius:14px; overflow:hidden;
+}
+
+.hstat { padding:16px 28px; text-align:center; }
+.hstat-num { display:block; font-family:var(--mono); font-size:20px; font-weight:600; color:var(--cyan); }
+.hstat-label { display:block; font-size:11px; color:var(--dim); margin-top:2px; }
+.hstat-div { width:1px; background:var(--border); align-self:stretch; }
+
+/* ─── SECTIONS ─── */
+.section { padding:90px 0; }
+.section.alt { background:var(--s1); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+
+.section-head { text-align:center; margin-bottom:56px; }
+.section-tag {
+  display:inline-block;
+  background:rgba(0,212,255,.08); border:1px solid rgba(0,212,255,.2);
+  color:var(--cyan); font-size:11px; font-weight:700; letter-spacing:2px;
+  padding:5px 16px; border-radius:100px; text-transform:uppercase;
+  margin-bottom:16px;
+}
+.section-head h2 { margin-bottom:12px; }
+.section-head p { max-width:520px; margin:0 auto; }
+
+/* ─── SERVICE CARDS ─── */
+.services-grid {
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(320px,1fr)); gap:16px;
+}
+
+.svc-card {
+  background:var(--s2); border:1px solid var(--border);
+  border-radius:var(--radius); padding:28px;
+  transition:border-color .25s, transform .2s;
+}
+.svc-card:hover { border-color:rgba(255,255,255,.15); transform:translateY(-3px); }
+
+.svc-icon {
+  width:52px; height:52px; border-radius:12px; border:1px solid;
+  display:flex; align-items:center; justify-content:center;
+  font-size:24px; margin-bottom:18px;
+}
+
+.svc-card h3 { margin-bottom:10px; }
+.svc-card p { font-size:13.5px; margin-bottom:18px; }
+
+.svc-link {
+  font-size:13px; font-weight:700; color:var(--cyan);
+  transition:gap .2s;
+}
+.svc-link:hover { color:var(--green); }
+
+/* ─── WHY US ─── */
+.why-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; }
+
+.why-card {
+  background:var(--s2); border:1px solid var(--border);
+  border-radius:var(--radius); padding:28px;
+  position:relative; overflow:hidden;
+}
+
+.why-num {
+  font-family:var(--mono); font-size:48px; font-weight:700;
+  color:rgba(0,212,255,.08); position:absolute; top:12px; right:18px;
+  line-height:1;
+}
+
+.why-card h4 { margin-bottom:10px; font-size:18px; }
+.why-card p { font-size:13.5px; }
+
+/* ─── CTA SECTION ─── */
+.cta-section { background:var(--s1); border-top:1px solid var(--border); }
+
+.cta-box {
+  background: linear-gradient(135deg, rgba(0,212,255,.06), rgba(0,240,135,.06));
+  border:1px solid rgba(0,212,255,.2);
+  border-radius:20px; padding:56px 40px;
+  text-align:center;
+}
+
+.cta-badge {
+  display:inline-block;
+  background:rgba(0,240,135,.1); border:1px solid rgba(0,240,135,.2);
+  color:var(--green); font-size:12px; font-weight:700; letter-spacing:1.5px;
+  padding:5px 16px; border-radius:100px; text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.cta-box h2 { margin-bottom:12px; }
+.cta-box > p { max-width:480px; margin:0 auto 24px; }
+
+.cta-perks {
+  display:flex; gap:20px; justify-content:center; flex-wrap:wrap;
+  margin-bottom:32px;
+}
+.cta-perks span { font-size:13px; font-weight:600; color:var(--green); }
+
+/* ─── TARIFS PAGE ─── */
+.price-table {
+  background:var(--s1); border:1px solid var(--border);
+  border-radius:16px; overflow:hidden;
+}
+
+.pt-head {
+  display:grid; grid-template-columns:2.5fr 1.5fr 1fr 1fr;
+  padding:13px 24px;
+  background:rgba(255,255,255,.03);
+  border-bottom:1px solid var(--border);
+  font-size:10px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; color:var(--dim);
+}
+
+.pt-cat {
+  padding:10px 24px;
+  background:rgba(0,0,0,.2);
+  font-size:10px; font-weight:700; letter-spacing:1px;
+  text-transform:uppercase;
+  border-bottom:1px solid rgba(255,255,255,.03);
+  grid-column:1/-1;
+}
+
+.pt-row {
+  display:grid; grid-template-columns:2.5fr 1.5fr 1fr 1fr;
+  padding:14px 24px; border-bottom:1px solid rgba(255,255,255,.03);
+  align-items:center; transition:background .15s;
+}
+.pt-row:hover { background:rgba(255,255,255,.02); }
+.pt-row:last-child { border-bottom:none; }
+
+.pt-name { font-size:13px; font-weight:500; color:var(--white); }
+.pt-name small { display:block; font-size:11px; color:var(--dim); margin-top:2px; }
+.pt-price { font-family:var(--mono); font-size:12px; color:var(--green); }
+.pt-time { font-size:11px; color:var(--dim); }
+.pt-seg { display:flex; gap:4px; flex-wrap:wrap; }
+
+.tg { font-size:9px; font-weight:700; letter-spacing:.5px; padding:2px 7px; border-radius:4px; text-transform:uppercase; }
+.tg-c { background:rgba(0,212,255,.1); color:var(--cyan); }
+.tg-g { background:rgba(0,240,135,.1); color:var(--green); }
+.tg-a { background:rgba(255,201,64,.1); color:var(--amber); }
+
+/* ─── CONTACT PAGE ─── */
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
+
+.contact-form {
+  background:var(--s1); border:1px solid var(--border);
+  border-radius:var(--radius); padding:36px;
+}
+
+.form-group { margin-bottom:18px; }
+.form-group label { display:block; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--dim); margin-bottom:8px; }
+.form-group input, .form-group select, .form-group textarea {
+  width:100%; background:var(--s2); border:1px solid var(--border);
+  border-radius:10px; padding:12px 16px;
+  font-family:var(--f); font-size:14px; color:var(--white);
+  outline:none; transition:border-color .2s;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--cyan); }
+.form-group textarea { min-height:120px; resize:vertical; }
+.form-group select option { background:var(--s2); }
+
+.contact-info { display:flex; flex-direction:column; gap:16px; }
+
+.info-card {
+  background:var(--s2); border:1px solid var(--border);
+  border-radius:var(--radius); padding:22px;
+  display:flex; gap:16px; align-items:flex-start;
+}
+.info-icon { font-size:24px; flex-shrink:0; }
+.info-card h4 { margin-bottom:4px; }
+.info-card p { font-size:13px; }
+
+/* ─── SERVICES FULL PAGE ─── */
+.service-section { padding:80px 0; border-bottom:1px solid var(--border); }
+.service-section:last-child { border-bottom:none; }
+
+.service-header {
+  display:flex; gap:20px; align-items:center; margin-bottom:36px;
+}
+.service-big-icon {
+  width:64px; height:64px; border-radius:14px; border:1px solid;
+  display:flex; align-items:center; justify-content:center;
+  font-size:30px; flex-shrink:0;
+}
+.service-header h2 { margin-bottom:6px; }
+.service-header p { font-size:14px; }
+
+.cards-3 { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
+
+.detail-card {
+  background:var(--s2); border:1px solid var(--border);
+  border-radius:var(--radius); padding:24px;
+  transition:border-color .2s;
+}
+.detail-card:hover { border-color:rgba(255,255,255,.15); }
+.detail-card h4 { margin-bottom:8px; }
+.detail-card p { font-size:13px; margin-bottom:14px; }
+.detail-card .price-badge {
+  font-family:var(--mono); font-size:12px; font-weight:600;
+  padding:5px 12px; border-radius:6px;
+  background:rgba(0,240,135,.1); color:var(--green);
+  display:inline-block;
+}
+
+/* ─── FOOTER ─── */
+.footer { background:var(--s1); border-top:1px solid var(--border); padding:60px 0 0; }
+
+.footer-inner {
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px;
+  padding-bottom:48px;
+}
+
+.footer-brand p { font-size:13px; margin-top:14px; max-width:280px; }
+
+.footer-links { display:flex; flex-direction:column; }
+.footer-links a { font-size:13px; color:var(--dim); padding:5px 0; transition:color .2s; }
+.footer-links a:hover { color:var(--white); }
+
+.footer-contact p { font-size:13px; color:var(--dim); padding:4px 0; }
+
+.footer-bottom {
+  border-top:1px solid var(--border); padding:20px 24px;
+  text-align:center;
+}
+.footer-bottom p { font-size:12px; color:var(--dim); }
+
+/* ─── PAGE HEADER ─── */
+.page-hero {
+  padding: 120px 0 60px;
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(0,212,255,.07) 0%, transparent 70%), var(--s1);
+  border-bottom:1px solid var(--border);
+  text-align:center;
+}
+.page-hero h1 { font-size:clamp(32px,4vw,52px); margin-bottom:12px; }
+.page-hero p { max-width:520px; margin:0 auto; }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  .footer-inner { grid-template-columns:1fr 1fr; }
+  .contact-grid { grid-template-columns:1fr; }
+  .pt-head, .pt-row { grid-template-columns:2fr 1fr; }
+  .pt-head > *:nth-child(n+3), .pt-row > *:nth-child(n+3) { display:none; }
+}
+
+@media(max-width:640px){
+  .nav-links, .btn-nav { display:none; }
+  .burger { display:block; margin-left:auto; }
+  .hero-content { padding:60px 0; }
+  .hero-stats { flex-direction:column; }
+  .hstat-div { width:auto; height:1px; align-self:stretch; }
+  .footer-inner { grid-template-columns:1fr; gap:32px; }
+  .cta-box { padding:36px 20px; }
+  .section { padding:60px 0; }
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="logo-box">S</div><div><span class="logo-name">SysTek Solutions</span><span class="logo-sub">Tamatave · Madagascar</span></div></a>
+    <div class="nav-links">
+      <a href="index.html">Accueil</a>
+      <a href="services.html" class="active">Services</a>
+      <a href="tarifs.html">Tarifs</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a href="contact.html" class="btn-nav">Devis Gratuit</a>
+    <button class="burger" id="burger">&#9776;</button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Accueil</a><a href="services.html">Services</a>
+    <a href="tarifs.html">Tarifs</a><a href="contact.html">Contact</a>
+    <a href="contact.html" class="btn-nav" style="display:inline-block;margin-top:10px">Devis Gratuit</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="hero-badge" style="display:inline-block;background:rgba(0,240,135,.1);border:1px solid rgba(0,240,135,.25);color:#00f087;font-size:12px;font-weight:700;letter-spacing:1.5px;padding:6px 18px;border-radius:100px;text-transform:uppercase;margin-bottom:20px">35+ Prestations disponibles</div>
+    <h1>Tous nos <span class="grad">services IT</span></h1>
+    <p>Une offre complète pour particuliers, PME et hôtels à Tamatave. Diagnostic gratuit pour tout nouveau client.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- MAINTENANCE -->
+  <div class="service-section" id="maintenance">
+    <div class="service-header">
+      <div class="service-big-icon" style="background:rgba(0,212,255,.1);border-color:rgba(0,212,255,.2)">🔧</div>
+      <div>
+        <h2>Maintenance & <span class="grad">Dépannage</span></h2>
+        <p>Réparation PC, Laptop et périphériques — sur site à Tamatave ou en atelier.</p>
+      </div>
+    </div>
+    <div class="cards-3">
+      <div class="detail-card"><h4>💻 Dépannage PC / Laptop</h4><p>Diagnostic complet, suppression de virus, optimisation, réinstallation OS, remplacement composants. Toutes marques.</p><span class="price-badge">30 000 – 120 000 Ar</span></div>
+      <div class="detail-card"><h4>🖨️ Maintenance imprimantes</h4><p>Nettoyage, remplacement cartouches, réparation bourrages, mise en réseau. Contrat mensuel disponible.</p><span class="price-badge">40 000 – 80 000 Ar</span></div>
+      <div class="detail-card"><h4>📱 Récupération de données</h4><p>Fichiers supprimés, disque dur corrompu, clé USB endommagée. Diagnostic sans engagement. Confidentialité garantie.</p><span class="price-badge">50 000 – 150 000 Ar</span></div>
+    </div>
+  </div>
+
+  <!-- BACKUP -->
+  <div class="service-section" id="backup">
+    <div class="service-header">
+      <div class="service-big-icon" style="background:rgba(0,240,135,.1);border-color:rgba(0,240,135,.2)">💾</div>
+      <div>
+        <h2>Backup & <span class="grad">Restauration</span></h2>
+        <p>Protégez vos données — à Tamatave, chaleur et coupures de courant détruisent les disques durs chaque semaine.</p>
+      </div>
+    </div>
+    <div class="cards-3">
+      <div class="detail-card"><h4>🗂️ Sauvegarde locale auto</h4><p>Backup automatique sur disque externe ou NAS. Planification quotidienne/hebdomadaire. Test de restauration inclus.</p><span class="price-badge">60 000 – 100 000 Ar</span></div>
+      <div class="detail-card"><h4>☁️ Backup Cloud automatique</h4><p>Synchronisation vers Google Drive ou solution dédiée. Données chiffrées, accessibles partout. Protection contre incendie et vol.</p><span class="price-badge">50 000 Ar + abo.</span></div>
+      <div class="detail-card"><h4>🆘 Restauration d'urgence</h4><p>Récupération après crash, virus ou suppression accidentelle. Intervention sous 4h à Tamatave. Rapport fourni.</p><span class="price-badge">100 000 – 250 000 Ar</span></div>
+      <div class="detail-card"><h4>🔄 Plan de reprise d'activité</h4><p>Stratégie complète : audit données critiques, procédure testée, reprise garantie en moins de 4h après incident.</p><span class="price-badge">200 000 – 400 000 Ar</span></div>
+    </div>
+  </div>
+
+  <!-- SÉCURITÉ -->
+  <div class="service-section" id="securite">
+    <div class="service-header">
+      <div class="service-big-icon" style="background:rgba(255,77,109,.1);border-color:rgba(255,77,109,.2)">🔒</div>
+      <div>
+        <h2>Sécurité <span class="grad">Informatique</span></h2>
+        <p>Antivirus, firewall, audit — protégez votre activité contre les cybermenaces croissantes à Madagascar.</p>
+      </div>
+    </div>
+    <div class="cards-3">
+      <div class="detail-card"><h4>🛡️ Antivirus Pro</h4><p>ESET, Bitdefender ou Kaspersky. Configuration optimale, politiques d'exclusion et première analyse complète offerte.</p><span class="price-badge">40 000 – 120 000 Ar</span></div>
+      <div class="detail-card"><h4>🧱 Firewall & Routeur sécurisé</h4><p>Paramétrage avancé, séparation réseau invité/interne, blocage des menaces, documentation de la configuration.</p><span class="price-badge">80 000 – 200 000 Ar</span></div>
+      <div class="detail-card"><h4>🔍 Audit de sécurité</h4><p>Analyse complète des vulnérabilités : réseau, postes, mots de passe, accès. Rapport + plan de correction priorisé.</p><span class="price-badge">150 000 – 300 000 Ar</span></div>
+      <div class="detail-card"><h4>🚨 Nettoyage post-virus</h4><p>Éradication complète des malwares, récupération si possible des fichiers chiffrés, remise en état sécurisée.</p><span class="price-badge">80 000 – 200 000 Ar</span></div>
+    </div>
+  </div>
+
+  <!-- RÉSEAU -->
+  <div class="service-section" id="reseau">
+    <div class="service-header">
+      <div class="service-big-icon" style="background:rgba(0,212,255,.1);border-color:rgba(0,212,255,.2)">📡</div>
+      <div>
+        <h2>Réseaux & <span class="grad">Wi-Fi</span></h2>
+        <p>Installation et optimisation de votre infrastructure réseau — particuliers, hôtels et entreprises à Tamatave.</p>
+      </div>
+    </div>
+    <div class="cards-3">
+      <div class="detail-card"><h4>📶 Wi-Fi particulier</h4><p>Configuration box, extension couverture, Wi-Fi mesh grande maison. Sécurisation WPA3. Paramétrage appareils inclus.</p><span class="price-badge">60 000 – 100 000 Ar</span></div>
+      <div class="detail-card"><h4>🏨 Wi-Fi hôtel / restaurant</h4><p>Multi-bornes avec portail captif personnalisé, gestion accès clients, QoS et monitoring. Réseau client séparé du réseau staff.</p><span class="price-badge">300 000 – 800 000 Ar</span></div>
+      <div class="detail-card"><h4>🔌 Câblage réseau entreprise</h4><p>Tirage câbles RJ45 Cat6, installation baie de brassage, switch manageable, étiquetage et documentation réseau.</p><span class="price-badge">Sur devis</span></div>
+    </div>
+  </div>
+
+  <!-- CCTV -->
+  <div class="service-section" id="cctv">
+    <div class="service-header">
+      <div class="service-big-icon" style="background:rgba(255,201,64,.1);border-color:rgba(255,201,64,.2)">📹</div>
+      <div>
+        <h2>Surveillance <span class="grad">CCTV</span></h2>
+        <p>Voyez tout, partout, en temps réel depuis votre smartphone. Installation professionnelle à Tamatave.</p>
+      </div>
+    </div>
+    <div class="cards-3">
+      <div class="detail-card"><h4>🏠 Pack Maison — 2 à 4 caméras</h4><p>Caméras HD intérieur/extérieur, enregistreur DVR, accès live smartphone, vision nocturne incluse.</p><span class="price-badge">200 000 – 350 000 Ar</span></div>
+      <div class="detail-card"><h4>🏪 Pack Commerce — 4 à 8 caméras</h4><p>Couverture complète boutique : caisse, entrée, stock. Enregistrement 24h/24, accès distance propriétaire.</p><span class="price-badge">350 000 – 600 000 Ar</span></div>
+      <div class="detail-card"><h4>🏨 Pack Pro — 8 à 16 caméras</h4><p>NVR HD, monitoring temps réel, alertes automatiques, accès multi-utilisateurs, stockage 30 jours.</p><span class="price-badge">600 000 – 1 500 000 Ar</span></div>
+      <div class="detail-card"><h4>🔧 Maintenance CCTV mensuelle</h4><p>Vérification enregistrements, nettoyage caméras, remplacement si défaut, rapport d'état mensuel.</p><span class="price-badge">50 000 – 100 000 Ar/mois</span></div>
+    </div>
+  </div>
+
+  <!-- FORMATION -->
+  <div class="service-section" id="formation">
+    <div class="service-header">
+      <div class="service-big-icon" style="background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.2)">🎓</div>
+      <div>
+        <h2>Formation <span class="grad">Informatique</span></h2>
+        <p>Rendez vos équipes autonomes — formations à Tamatave, individuelles ou en groupe.</p>
+      </div>
+    </div>
+    <div class="cards-3">
+      <div class="detail-card"><h4>📊 Word & Excel</h4><p>Du débutant à l'intermédiaire. Exercices sur vos données réelles. Support de cours fourni. Individuel ou groupe.</p><span class="price-badge">30 000 Ar/heure</span></div>
+      <div class="detail-card"><h4>🔐 Cybersécurité</h4><p>Atelier 2–3h : phishing, mots de passe, comportements risqués. Simulation d'attaque incluse. Guide remis à chacun.</p><span class="price-badge">100 000 – 200 000 Ar</span></div>
+      <div class="detail-card"><h4>🤖 Initiation à l'IA</h4><p>ChatGPT, Gemini — cas pratiques métier locaux. Rédaction, analyse, automatisation. Idéal pour PME et hôtels.</p><span class="price-badge">50 000 – 150 000 Ar</span></div>
+      <div class="detail-card"><h4>🏢 Formation sur mesure</h4><p>Programme personnalisé selon vos outils et vos équipes. En intra-entreprise à Tamatave. Certification remise.</p><span class="price-badge">Sur devis</span></div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<section class="section cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <div class="cta-badge">🎁 Offre de lancement</div>
+      <h2>Diagnostic & Devis <span class="grad-green">100% Gratuits</span></h2>
+      <p>Pour tous les nouveaux clients. Contactez-nous maintenant — réponse sous 2h.</p>
+      <div class="cta-perks">
+        <span>✅ Diagnostic offert</span><span>✅ Devis sans engagement</span><span>✅ Intervention locale</span>
+      </div>
+      <a href="contact.html" class="btn-primary btn-large">Nous contacter</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo"><div class="logo-box">S</div><div><span class="logo-name">SysTek Solutions</span><span class="logo-sub">Reliable IT Systems · Local Support</span></div></div>
+      <p>Votre partenaire informatique de confiance à Tamatave, Madagascar.</p>
+    </div>
+    <div class="footer-links"><h5>Navigation</h5><a href="index.html">Accueil</a><a href="services.html">Services</a><a href="tarifs.html">Tarifs</a><a href="contact.html">Contact</a></div>
+    <div class="footer-links"><h5>Services</h5><a href="#maintenance">Dépannage PC</a><a href="#backup">Backup</a><a href="#securite">Sécurité IT</a><a href="#cctv">Caméras CCTV</a><a href="#formation">Formation</a></div>
+    <div class="footer-contact"><h5>Contact</h5><p>📍 Tamatave, Madagascar</p><p>📞 +261 34 00 000 00</p><p>✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="167579786277756256656f6562737d387b71">[email&#160;protected]</a></p></div>
+  </div>
+  <div class="footer-bottom"><p>© 
