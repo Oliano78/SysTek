@@ -454,21 +454,22 @@ p { color:#8aadcc; line-height:1.7; }
       <!-- FORM -->
       <div class="contact-form">
         <h3 style="margin-bottom:24px">Demande de <span class="grad">devis gratuit</span></h3>
+        <form id="contactForm" onsubmit="return false;">
         <div class="form-group">
           <label>Nom complet *</label>
-          <input type="text" placeholder="Votre nom">
+          <input type="text" name="nom" placeholder="Votre nom" required>
         </div>
         <div class="form-group">
           <label>Téléphone *</label>
-          <input type="tel" placeholder="+261 XX XX XX XX">
+          <input type="tel" name="tel" placeholder="+261 XX XX XX XX" required>
         </div>
         <div class="form-group">
           <label>Email</label>
-          <input type="email" placeholder="votre@email.com">
+          <input type="email" name="email" placeholder="votre@email.com">
         </div>
         <div class="form-group">
           <label>Type de client</label>
-          <select>
+          <select name="typeClient">
             <option value="">Sélectionner...</option>
             <option>Particulier</option>
             <option>PME / Entreprise</option>
@@ -478,7 +479,7 @@ p { color:#8aadcc; line-height:1.7; }
         </div>
         <div class="form-group">
           <label>Service souhaité</label>
-          <select>
+          <select name="service">
             <option value="">Sélectionner...</option>
             <option>Dépannage PC / Laptop</option>
             <option>Backup & Restauration de données</option>
@@ -492,12 +493,18 @@ p { color:#8aadcc; line-height:1.7; }
         </div>
         <div class="form-group">
           <label>Décrivez votre besoin</label>
-          <textarea placeholder="Expliquez brièvement votre situation ou votre problème..."></textarea>
+          <textarea name="message" placeholder="Expliquez brièvement votre situation ou votre problème..."></textarea>
         </div>
-        <button class="btn-primary" style="width:100%;font-size:15px;padding:14px" onclick="alert('Merci ! Nous vous contactons sous 2h. ☎️')">
-          Envoyer ma demande →
-        </button>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button type="button" class="btn-primary" style="flex:1;min-width:180px;font-size:14px;padding:14px;display:flex;align-items:center;justify-content:center;gap:8px" onclick="sendByWhatsApp()">
+            💬 Envoyer via WhatsApp
+          </button>
+          <button type="button" class="btn-ghost" style="flex:1;min-width:180px;font-size:14px;padding:13px;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px" onclick="sendByEmail()">
+            ✉️ Envoyer par Email
+          </button>
+        </div>
         <p style="font-size:11px;margin-top:12px;text-align:center">Diagnostic et devis toujours gratuits · Réponse sous 2h</p>
+        </form>
       </div>
 
       <!-- INFO -->
@@ -513,14 +520,14 @@ p { color:#8aadcc; line-height:1.7; }
           <div class="info-icon">📞</div>
           <div>
             <h4>Téléphone & WhatsApp</h4>
-            <p>+261 34 00 000 00<br>Disponible 7j/7 · Urgences 24h/24</p>
+            <p><a href="tel:+261340000000" style="color:var(--white)">+261 34 00 000 00</a> · <a href="https://wa.me/261340000000" target="_blank" style="color:var(--green)">Discuter sur WhatsApp</a><br>Disponible 7j/7 · Urgences 24h/24</p>
           </div>
         </div>
         <div class="info-card">
           <div class="info-icon">✉️</div>
           <div>
             <h4>Email</h4>
-            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="abc8c4c5dfcac8dfebd8d2d8dfcec085c6cc">[email&#160;protected]</a><br>Réponse sous 2h en jours ouvrés</p>
+            <p><a href="mailto:contact@systek.mg" style="color:var(--white)">contact@systek.mg</a><br>Réponse sous 2h en jours ouvrés</p>
           </div>
         </div>
         <div class="info-card">
@@ -554,4 +561,70 @@ p { color:#8aadcc; line-height:1.7; }
     <div class="footer-brand"><div class="nav-logo"><div class="logo-box">S</div><div><span class="logo-name">SysTek Solutions</span><span class="logo-sub">Reliable IT Systems · Local Support</span></div></div><p>Votre partenaire informatique de confiance à Tamatave, Madagascar.</p></div>
     <div class="footer-links"><h5>Navigation</h5><a href="index.html">Accueil</a><a href="services.html">Services</a><a href="tarifs.html">Tarifs</a><a href="contact.html">Contact</a></div>
     <div class="footer-links"><h5>Services</h5><a href="services.html#maintenance">Dépannage PC</a><a href="services.html#backup">Backup</a><a href="services.html#securite">Sécurité IT</a><a href="services.html#cctv">Caméras CCTV</a></div>
-    <div class="footer-contact"><h5>Contact</h5><p>📍 Tamatave, Madagascar</p><p>📞 +261 34 00 000 00</p><p>✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail=
+    <div class="footer-contact"><h5>Contact</h5><p>📍 Tamatave, Madagascar</p><p>📞 <a href="tel:+261340000000">+261 34 00 000 00</a></p><p>✉️ <a href="mailto:contact@systek.mg">contact@systek.mg</a></p></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 SysTek Solutions — Tous droits réservés</p></div>
+</footer>
+
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',scrollY>20));
+const burger=document.getElementById('burger');
+const mobileMenu=document.getElementById('mobileMenu');
+if(burger&&mobileMenu)burger.addEventListener('click',()=>mobileMenu.classList.toggle('open'));
+
+/* ─── FORMULAIRE : ENVOI EMAIL ET/OU WHATSAPP ─── */
+const WHATSAPP_NUMBER = '261340000000'; // +261 34 00 000 00 (format international sans le +)
+const CONTACT_EMAIL = 'contact@systek.mg';
+
+function getFormData(){
+  const form = document.getElementById('contactForm');
+  return {
+    nom: form.nom.value.trim(),
+    tel: form.tel.value.trim(),
+    email: form.email.value.trim(),
+    typeClient: form.typeClient.value,
+    service: form.service.value,
+    message: form.message.value.trim()
+  };
+}
+
+function validateForm(data){
+  if(!data.nom){ alert('Merci de renseigner votre nom complet.'); return false; }
+  if(!data.tel){ alert('Merci de renseigner votre numéro de téléphone.'); return false; }
+  return true;
+}
+
+function buildMessage(data){
+  let lines = [
+    'Nouvelle demande de devis — SysTek Solutions',
+    '',
+    `Nom complet : ${data.nom}`,
+    `Téléphone : ${data.tel}`
+  ];
+  if(data.email) lines.push(`Email : ${data.email}`);
+  if(data.typeClient) lines.push(`Type de client : ${data.typeClient}`);
+  if(data.service) lines.push(`Service souhaité : ${data.service}`);
+  if(data.message) lines.push('', `Description du besoin :`, data.message);
+  return lines.join('\n');
+}
+
+function sendByEmail(){
+  const data = getFormData();
+  if(!validateForm(data)) return;
+  const subject = encodeURIComponent(`Demande de devis — ${data.nom}`);
+  const body = encodeURIComponent(buildMessage(data));
+  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+}
+
+function sendByWhatsApp(){
+  const data = getFormData();
+  if(!validateForm(data)) return;
+  const text = encodeURIComponent(buildMessage(data));
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank');
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){const t=document.querySelector(this.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}}));
+</script>
+</body>
+</html>
